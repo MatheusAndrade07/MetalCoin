@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Metalcoin.Core.Enums;
 
 namespace MetalCoin.Entities
 {
@@ -35,18 +36,5 @@ namespace MetalCoin.Entities
         [Required]
         public StatusCupom Status { get; set; }
     }
-
-    public enum TipoDesconto
-    {
-        Porcentagem,
-        ValorFixo
-    }
-
-    public enum StatusCupom
-    {
-        Ativo,
-        Expirado,
-        Desativado,
-        TotalmenteUtilizado
-    }
+    
 }

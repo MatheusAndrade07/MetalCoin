@@ -1,10 +1,11 @@
-﻿using MetalCoin.Entities;
+﻿using MetalCoin.Domain;
+using MetalCoin.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace MetalCoin.Infra.Data.Mappings
 {
-    public class CupomMapping : IEntityTypeConfiguration<Cupom>
+    public class CupomConfiguration : IEntityTypeConfiguration<Cupom>
     {
         public void Configure(EntityTypeBuilder<Cupom> builder)
         {
@@ -18,14 +19,16 @@ namespace MetalCoin.Infra.Data.Mappings
                 .HasColumnType("varchar(100)");
 
             builder.Property(c => c.ValorDesconto)
-                .IsRequired();
+                .IsRequired()
+                .HasColumnType("decimal(18,2)"); 
 
             builder.Property(c => c.TipoDesconto)
-                .IsRequired();
+                .IsRequired()
+                .HasConversion<int>(); 
 
             builder.Property(c => c.DataValidade)
-                .IsRequired();
-
+                .IsRequired()
+                .HasColumnType("datetime2"); 
             builder.Property(c => c.QuantidadeLiberada)
                 .IsRequired();
 
@@ -33,7 +36,8 @@ namespace MetalCoin.Infra.Data.Mappings
                 .IsRequired();
 
             builder.Property(c => c.Status)
-                .IsRequired();
+                .IsRequired()
+                .HasConversion<int>(); 
         }
     }
 }

@@ -1,13 +1,15 @@
 ﻿using MetalCoin.Domain;
 using MetalCoin.Domain.Interfaces;
 using MetalCoin.Entities;
+using Metalcoin.Core.Enums;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Metalcoin.Core.Interfaces.Services;
 
 namespace MetalCoin.Application.Services
 {
-    public class CupomService
+    public class CupomService : ICupomService
     {
         private readonly ICupomRepository _cupomRepository;
 
@@ -51,6 +53,31 @@ namespace MetalCoin.Application.Services
             await _cupomRepository.Atualizar(cupom);
 
             return cupom;
+        }
+
+        public Task<Cupom> ObterCupomPorCodigo(string codigo)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IEnumerable<Cupom>> ObterCuponsAtivos()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> ValidarCupom(int cupomId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task AtivarCupom(int cupomId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task DesativarCupom(int cupomId)
+        {
+            throw new NotImplementedException();
         }
     }
 }
