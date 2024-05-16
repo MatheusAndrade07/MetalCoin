@@ -96,26 +96,22 @@ namespace MetalCoin.API.Controllers
             return Ok();
         }
 
-        // 9. Usar Cupom
         [HttpPost("{id:int}/usar")]
         public async Task<ActionResult> UsarCupom(int id)
         {
             var cupom = await _cupomRepository.ObterPorId(id);
             if (cupom == null) return NotFound("Cupom não encontrado.");
 
-            // Verificar se o cupom está ativo e disponível
             if (cupom.Status != StatusCupom.Ativo || cupom.QuantidadeUsada >= cupom.QuantidadeLiberada)
             {
                 return BadRequest("Cupom não está disponível para uso.");
             }
 
-            // Bloqueio de Cupons Expirados
             if (cupom.DataValidade < DateTime.Now)
             {
                 return BadRequest("Cupom expirado.");
             }
 
-            // Reduzir a quantidade disponível do cupom
             cupom.QuantidadeUsada++;
             await _cupomRepository.Atualizar(cupom);
 
