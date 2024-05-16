@@ -20,77 +20,107 @@ namespace MetalCoin.API.Controllers
             _cupomRepository = cupomRepository;
         }
 
-        // GET: api/Cupom (todos os cupons)
-        [HttpGet]
+        // GET: api/Cupom/todos (todos os cupons)
+        [HttpGet("todos")]
         public async Task<ActionResult<IEnumerable<CupomResponse>>> ObterTodosCupons()
         {
-            var cupons = await _cupomRepository.ObterTodos();
-
-            // Mapear entidades Cupom para CupomResponse
-            var cupomResponses = cupons.Select(c => new CupomResponse
+            try
             {
-                Id = c.Id,
-                Codigo = c.Codigo,
-                Descricao = c.Descricao,
-                ValorDesconto = c.ValorDesconto,
-                TipoDesconto = c.TipoDesconto,
-                DataValidade = c.DataValidade,
-                QuantidadeLiberada = c.QuantidadeLiberada,
-                QuantidadeUsada = c.QuantidadeUsada,
-                Status = c.Status
-            });
+                var cupons = await _cupomRepository.ObterTodos();
 
-            return Ok(cupomResponses);
+                // Mapear entidades Cupom para CupomResponse
+                var cupomResponses = cupons.Select(c => new CupomResponse
+                {
+                    Id = c.Id,
+                    Codigo = c.Codigo,
+                    Descricao = c.Descricao,
+                    ValorDesconto = c.ValorDesconto,
+                    TipoDesconto = c.TipoDesconto,
+                    DataValidade = c.DataValidade,
+                    QuantidadeLiberada = c.QuantidadeLiberada,
+                    QuantidadeUsada = c.QuantidadeUsada,
+                    Status = c.Status
+                });
+
+                return Ok(cupomResponses);
+            }
+            catch (Exception ex)
+            {
+                // Logar a exceção (opcional, mas recomendado)
+                // _logger.LogError(ex, "Erro ao obter todos os cupons.");
+
+                return StatusCode(500, "Erro interno do servidor ao obter os cupons.");
+            }
         }
 
         // GET: api/Cupom/ativos (apenas cupons ativos)
         [HttpGet("ativos")]
         public async Task<ActionResult<IEnumerable<CupomResponse>>> ObterCuponsAtivos()
         {
-            var cupons = await _cupomRepository.ObterCuponsAtivosEDisponiveis();
-
-            // Mapear entidades Cupom para CupomResponse
-            var cupomResponses = cupons.Select(c => new CupomResponse
+            try
             {
-                Id = c.Id,
-                Codigo = c.Codigo,
-                Descricao = c.Descricao,
-                ValorDesconto = c.ValorDesconto,
-                TipoDesconto = c.TipoDesconto,
-                DataValidade = c.DataValidade,
-                QuantidadeLiberada = c.QuantidadeLiberada,
-                QuantidadeUsada = c.QuantidadeUsada,
-                Status = c.Status
-            });
+                var cupons = await _cupomRepository.ObterCuponsAtivosEDisponiveis();
 
-            return Ok(cupomResponses);
+                // Mapear entidades Cupom para CupomResponse
+                var cupomResponses = cupons.Select(c => new CupomResponse
+                {
+                    Id = c.Id,
+                    Codigo = c.Codigo,
+                    Descricao = c.Descricao,
+                    ValorDesconto = c.ValorDesconto,
+                    TipoDesconto = c.TipoDesconto,
+                    DataValidade = c.DataValidade,
+                    QuantidadeLiberada = c.QuantidadeLiberada,
+                    QuantidadeUsada = c.QuantidadeUsada,
+                    Status = c.Status
+                });
+
+                return Ok(cupomResponses);
+            }
+            catch (Exception ex)
+            {
+                // Logar a exceção (opcional, mas recomendado)
+                // _logger.LogError(ex, "Erro ao obter cupons ativos.");
+
+                return StatusCode(500, "Erro interno do servidor ao obter os cupons ativos.");
+            }
         }
 
         // GET: api/Cupom/indisponiveis
         [HttpGet("indisponiveis")]
         public async Task<ActionResult<IEnumerable<CupomResponse>>> ObterCuponsIndisponiveis()
         {
-            var cupons = await _cupomRepository.ObterCuponsIndisponiveis();
-
-            // Mapear entidades Cupom para CupomResponse
-            var cupomResponses = cupons.Select(c => new CupomResponse
+            try
             {
-                Id = c.Id,
-                Codigo = c.Codigo,
-                Descricao = c.Descricao,
-                ValorDesconto = c.ValorDesconto,
-                TipoDesconto = c.TipoDesconto,
-                DataValidade = c.DataValidade,
-                QuantidadeLiberada = c.QuantidadeLiberada,
-                QuantidadeUsada = c.QuantidadeUsada,
-                Status = c.Status
-            });
+                var cupons = await _cupomRepository.ObterCuponsIndisponiveis();
 
-            return Ok(cupomResponses);
+                // Mapear entidades Cupom para CupomResponse
+                var cupomResponses = cupons.Select(c => new CupomResponse
+                {
+                    Id = c.Id,
+                    Codigo = c.Codigo,
+                    Descricao = c.Descricao,
+                    ValorDesconto = c.ValorDesconto,
+                    TipoDesconto = c.TipoDesconto,
+                    DataValidade = c.DataValidade,
+                    QuantidadeLiberada = c.QuantidadeLiberada,
+                    QuantidadeUsada = c.QuantidadeUsada,
+                    Status = c.Status
+                });
+
+                return Ok(cupomResponses);
+            }
+            catch (Exception ex)
+            {
+                // Logar a exceção (opcional, mas recomendado)
+                // _logger.LogError(ex, "Erro ao obter cupons indisponíveis.");
+
+                return StatusCode(500, "Erro interno do servidor ao obter os cupons indisponíveis.");
+            }
         }
 
-        // POST: api/Cupom (cadastrar um novo cupom)
-        [HttpPost]
+        // POST: api/Cupom/criar (cadastrar um novo cupom)
+        [HttpPost("criar")]
         public async Task<ActionResult<CupomResponse>> CadastrarCupom(CupomRequest request)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
@@ -113,7 +143,17 @@ namespace MetalCoin.API.Controllers
                 return BadRequest("Data de validade não pode estar no passado.");
             }
 
-            await _cupomRepository.Adicionar(cupom);
+            try
+            {
+                await _cupomRepository.Adicionar(cupom);
+            }
+            catch (Exception ex)
+            {
+                // Logar a exceção (opcional, mas recomendado)
+                // _logger.LogError(ex, "Erro ao cadastrar cupom.");
+
+                return StatusCode(500, "Erro interno do servidor ao cadastrar o cupom.");
+            }
 
             // Mapear Cupom para CupomResponse
             var response = new CupomResponse
@@ -132,15 +172,15 @@ namespace MetalCoin.API.Controllers
             return CreatedAtAction(nameof(ObterCupomPorId), new { id = cupom.Id }, response);
         }
 
-        // PUT: api/Cupom/{id} (atualizar um cupom existente)
-        [HttpPut("{id:int}")]
+        // PUT: api/Cupom/atualizar/{id} (atualizar um cupom existente)
+        [HttpPut("atualizar/{id:int}")]
         public async Task<ActionResult<CupomResponse>> AtualizarCupom(int id, CupomRequest request)
         {
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+
             // Obter o cupom existente pelo ID
             var cupomExistente = await _cupomRepository.ObterPorId(id);
-            if (cupomExistente == null) return NotFound();
-
-            if (!ModelState.IsValid) return BadRequest(ModelState);
+            if (cupomExistente == null) return NotFound("Cupom não encontrado.");
 
             // Mapear CupomRequest para Cupom (atualizando o cupomExistente)
             cupomExistente.Codigo = request.Codigo;
@@ -156,7 +196,17 @@ namespace MetalCoin.API.Controllers
                 return BadRequest("Data de validade não pode estar no passado.");
             }
 
-            await _cupomRepository.Atualizar(cupomExistente);
+            try
+            {
+                await _cupomRepository.Atualizar(cupomExistente);
+            }
+            catch (Exception ex)
+            {
+                // Logar a exceção (opcional, mas recomendado)
+                // _logger.LogError(ex, "Erro ao atualizar cupom.");
+
+                return StatusCode(500, "Erro interno do servidor ao atualizar o cupom.");
+            }
 
             // Mapear Cupom para CupomResponse
             var response = new CupomResponse
@@ -175,24 +225,44 @@ namespace MetalCoin.API.Controllers
             return Ok(response);
         }
 
-        // PATCH: api/Cupom/{id}/ativar
-        [HttpPatch("{id:int}/ativar")]
+        // PATCH: api/Cupom/ativar/{id} 
+        [HttpPatch("ativar/{id:int}")]
         public async Task<ActionResult> AtivarCupom(int id)
         {
-            await _cupomRepository.AtivarCupom(id);
-            return Ok();
+            try
+            {
+                await _cupomRepository.AtivarCupom(id);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                // Logar a exceção (opcional, mas recomendado)
+                // _logger.LogError(ex, "Erro ao ativar cupom.");
+
+                return StatusCode(500, "Erro interno do servidor ao ativar o cupom.");
+            }
         }
 
-        // PATCH: api/Cupom/{id}/desativar
-        [HttpPatch("{id:int}/desativar")]
+        // PATCH: api/Cupom/desativar/{id}
+        [HttpPatch("desativar/{id:int}")]
         public async Task<ActionResult> DesativarCupom(int id)
         {
-            await _cupomRepository.DesativarCupom(id);
-            return Ok();
+            try
+            {
+                await _cupomRepository.DesativarCupom(id);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                // Logar a exceção (opcional, mas recomendado)
+                // _logger.LogError(ex, "Erro ao desativar cupom.");
+
+                return StatusCode(500, "Erro interno do servidor ao desativar o cupom.");
+            }
         }
 
-        // DELETE: api/Cupom/{id}
-        [HttpDelete("{id:int}")]
+        // DELETE: api/Cupom/excluir/{id} 
+        [HttpDelete("excluir/{id:int}")]
         public async Task<ActionResult> ExcluirCupom(int id)
         {
             var cupom = await _cupomRepository.ObterPorId(id);
@@ -203,12 +273,22 @@ namespace MetalCoin.API.Controllers
                 return BadRequest("Existem pedidos utilizando este cupom. Operação de exclusão cancelada.");
             }
 
-            await _cupomRepository.Remover(id);
-            return Ok();
+            try
+            {
+                await _cupomRepository.Remover(id);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                // Logar a exceção (opcional, mas recomendado)
+                // _logger.LogError(ex, "Erro ao excluir cupom.");
+
+                return StatusCode(500, "Erro interno do servidor ao excluir o cupom.");
+            }
         }
 
-        // POST: api/Cupom/{id}/usar
-        [HttpPost("{id:int}/usar")]
+        // POST: api/Cupom/usar/{id} 
+        [HttpPost("usar/{id:int}")]
         public async Task<ActionResult> UsarCupom(int id)
         {
             var cupom = await _cupomRepository.ObterPorId(id);
@@ -224,34 +304,53 @@ namespace MetalCoin.API.Controllers
                 return BadRequest("Cupom expirado.");
             }
 
-            cupom.QuantidadeUsada++;
-            await _cupomRepository.Atualizar(cupom);
+            try
+            {
+                cupom.QuantidadeUsada++;
+                await _cupomRepository.Atualizar(cupom);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                // Logar a exceção (opcional, mas recomendado)
+                // _logger.LogError(ex, "Erro ao usar cupom.");
 
-            return Ok();
+                return StatusCode(500, "Erro interno do servidor ao usar o cupom.");
+            }
         }
 
         // GET: api/Cupom/{id} (obter um cupom por ID)
         [HttpGet("{id:int}")]
         public async Task<ActionResult<CupomResponse>> ObterCupomPorId(int id)
         {
-            var cupom = await _cupomRepository.ObterPorId(id);
-            if (cupom == null) return NotFound("Cupom não encontrado.");
-
-            // Mapear Cupom para CupomResponse
-            var response = new CupomResponse
+            try
             {
-                Id = cupom.Id,
-                Codigo = cupom.Codigo,
-                Descricao = cupom.Descricao,
-                ValorDesconto = cupom.ValorDesconto,
-                TipoDesconto = cupom.TipoDesconto,
-                DataValidade = cupom.DataValidade,
-                QuantidadeLiberada = cupom.QuantidadeLiberada,
-                QuantidadeUsada = cupom.QuantidadeUsada,
-                Status = cupom.Status
-            };
+                var cupom = await _cupomRepository.ObterPorId(id);
+                if (cupom == null) return NotFound("Cupom não encontrado.");
 
-            return Ok(response);
+                // Mapear Cupom para CupomResponse
+                var response = new CupomResponse
+                {
+                    Id = cupom.Id,
+                    Codigo = cupom.Codigo,
+                    Descricao = cupom.Descricao,
+                    ValorDesconto = cupom.ValorDesconto,
+                    TipoDesconto = cupom.TipoDesconto,
+                    DataValidade = cupom.DataValidade,
+                    QuantidadeLiberada = cupom.QuantidadeLiberada,
+                    QuantidadeUsada = cupom.QuantidadeUsada,
+                    Status = cupom.Status
+                };
+
+                return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                // Logar a exceção (opcional, mas recomendado)
+                // _logger.LogError(ex, "Erro ao obter cupom por ID.");
+
+                return StatusCode(500, "Erro interno do servidor ao obter o cupom.");
+            }
         }
     }
 }
