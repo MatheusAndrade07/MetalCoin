@@ -20,15 +20,16 @@ namespace MetalCoin.Infra.Data.Mappings
 
             builder.Property(c => c.ValorDesconto)
                 .IsRequired()
-                .HasColumnType("decimal(18,2)"); 
+                .HasColumnType("decimal(18,2)");
 
             builder.Property(c => c.TipoDesconto)
                 .IsRequired()
-                .HasConversion<int>(); 
+                .HasColumnType("int"); 
 
             builder.Property(c => c.DataValidade)
                 .IsRequired()
-                .HasColumnType("datetime2"); 
+                .HasColumnType("datetime2");
+
             builder.Property(c => c.QuantidadeLiberada)
                 .IsRequired();
 
@@ -36,8 +37,8 @@ namespace MetalCoin.Infra.Data.Mappings
                 .IsRequired();
 
             builder.Property(c => c.Status)
-                .IsRequired()
-                .HasConversion<int>(); 
+                .IsRequired();
+                 
         }
     }
 }

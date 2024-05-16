@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MetalCoin.Infra.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240516004517_MetalCoinInfra")]
-    partial class MetalCoinInfra
+    [Migration("20240516233533_InicioBancoCupom")]
+    partial class InicioBancoCupom
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

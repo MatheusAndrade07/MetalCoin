@@ -8,8 +8,8 @@ namespace Metalcoin.Core.Enums
 {
     public enum TipoDesconto
     {    
-        Porcentagem,
-        ValorFixo
+        Porcentagem = 1,
+        ValorFixo = 2,
     }
     
 }

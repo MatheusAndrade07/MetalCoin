@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace MetalCoin.Infra.Migrations
 {
-    public partial class MetalCoinInfra : Migration
+    public partial class InicioBancoCupom : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
