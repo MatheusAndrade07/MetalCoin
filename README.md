@@ -8,7 +8,7 @@ MetalCoin é uma API RESTful robusta e completa, desenvolvida em ASP.NET Core, p
 
 - .NET 6 SDK: [https://dotnet.microsoft.com/en-us/download](https://dotnet.microsoft.com/en-us/download)
 - SQL Server: [https://www.microsoft.com/en-us/sql-server/sql-server-downloads](https://www.microsoft.com/en-us/sql-server/sql-server-downloads)
-- Visual Studio Code ou Visual Studio (opcional): [https://visualstudio.microsoft.com/](https://visualstudio.microsoft.com/)
+- Visual Studio: [https://visualstudio.microsoft.com/](https://visualstudio.microsoft.com/)
 
 ### Instalação
 
