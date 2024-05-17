@@ -46,9 +46,6 @@ namespace MetalCoin.API.Controllers
             }
             catch (Exception ex)
             {
-                // Logar a exceção (opcional, mas recomendado)
-                // _logger.LogError(ex, "Erro ao obter todos os cupons.");
-
                 return StatusCode(500, "Erro interno do servidor ao obter os cupons.");
             }
         }
@@ -78,10 +75,7 @@ namespace MetalCoin.API.Controllers
                 return Ok(cupomResponses);
             }
             catch (Exception ex)
-            {
-                // Logar a exceção (opcional, mas recomendado)
-                // _logger.LogError(ex, "Erro ao obter cupons ativos.");
-
+            {                
                 return StatusCode(500, "Erro interno do servidor ao obter os cupons ativos.");
             }
         }
@@ -111,10 +105,7 @@ namespace MetalCoin.API.Controllers
                 return Ok(cupomResponses);
             }
             catch (Exception ex)
-            {
-                // Logar a exceção (opcional, mas recomendado)
-                // _logger.LogError(ex, "Erro ao obter cupons indisponíveis.");
-
+            {                
                 return StatusCode(500, "Erro interno do servidor ao obter os cupons indisponíveis.");
             }
         }
@@ -148,10 +139,7 @@ namespace MetalCoin.API.Controllers
                 await _cupomRepository.Adicionar(cupom);
             }
             catch (Exception ex)
-            {
-                // Logar a exceção (opcional, mas recomendado)
-                // _logger.LogError(ex, "Erro ao cadastrar cupom.");
-
+            {               
                 return StatusCode(500, "Erro interno do servidor ao cadastrar o cupom.");
             }
 
@@ -201,10 +189,7 @@ namespace MetalCoin.API.Controllers
                 await _cupomRepository.Atualizar(cupomExistente);
             }
             catch (Exception ex)
-            {
-                // Logar a exceção (opcional, mas recomendado)
-                // _logger.LogError(ex, "Erro ao atualizar cupom.");
-
+            {                
                 return StatusCode(500, "Erro interno do servidor ao atualizar o cupom.");
             }
 
@@ -235,10 +220,7 @@ namespace MetalCoin.API.Controllers
                 return Ok();
             }
             catch (Exception ex)
-            {
-                // Logar a exceção (opcional, mas recomendado)
-                // _logger.LogError(ex, "Erro ao ativar cupom.");
-
+            {                
                 return StatusCode(500, "Erro interno do servidor ao ativar o cupom.");
             }
         }
@@ -253,10 +235,7 @@ namespace MetalCoin.API.Controllers
                 return Ok();
             }
             catch (Exception ex)
-            {
-                // Logar a exceção (opcional, mas recomendado)
-                // _logger.LogError(ex, "Erro ao desativar cupom.");
-
+            {               
                 return StatusCode(500, "Erro interno do servidor ao desativar o cupom.");
             }
         }
@@ -279,10 +258,7 @@ namespace MetalCoin.API.Controllers
                 return Ok();
             }
             catch (Exception ex)
-            {
-                // Logar a exceção (opcional, mas recomendado)
-                // _logger.LogError(ex, "Erro ao excluir cupom.");
-
+            {              
                 return StatusCode(500, "Erro interno do servidor ao excluir o cupom.");
             }
         }
@@ -311,10 +287,7 @@ namespace MetalCoin.API.Controllers
                 return Ok();
             }
             catch (Exception ex)
-            {
-                // Logar a exceção (opcional, mas recomendado)
-                // _logger.LogError(ex, "Erro ao usar cupom.");
-
+            {               
                 return StatusCode(500, "Erro interno do servidor ao usar o cupom.");
             }
         }
@@ -345,10 +318,7 @@ namespace MetalCoin.API.Controllers
                 return Ok(response);
             }
             catch (Exception ex)
-            {
-                // Logar a exceção (opcional, mas recomendado)
-                // _logger.LogError(ex, "Erro ao obter cupom por ID.");
-
+            {               
                 return StatusCode(500, "Erro interno do servidor ao obter o cupom.");
             }
         }
